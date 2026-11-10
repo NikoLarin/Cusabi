@@ -1,47 +1,32 @@
 import random
-import math
-# Just ev
+from addition_problem import *
+from division_problem import *
+from multiplication_problem import *
+from subtraction_problem import *
 
-# different prompts framing the question
-    #pay X to play, $8 on a win with 1/3 chance, -$4 on a loss with 2/3 chance.
-        # variations of this
+if __name__ == "__main__":
+    problem_range_min = 1
+    problem_range_max = 100
+    problem_choice = random.randint(4,4)
 
-# random promt
-# file with tons of prompts, pass in values call to the file where the prompts are and random number gen selects which prompt. 
+    if problem_choice == 1: #addition
+        addend1, addend2, answer = addition_problem(problem_range_min, problem_range_max)
+        user_answer = input(f"{addend1} + {addend2} = ")
 
-# function to generate 3 random values which fit the prompt 
-def math_problem(first_term: float, second_term: float):
-    decision = random.randint(1, 4)
-    rounded_first_term = round(first_term)
-    rounded_second_term = round(second_term)
+    if problem_choice == 2: #subtraction
+        minuend, subtrahend, answer = subtraction_problem(problem_range_min, problem_range_max)
+        user_answer = input(f"{minuend} - {subtrahend} = ")
 
-    if decision == 1: # addition
-        print(f"{first_term} + {second_term}")
-        answer = first_term + second_term
+    if problem_choice == 3: # multiplication
+        multiplicand, multiplier, answer = multiplication_problem(problem_range_min, problem_range_max)
+        user_answer = input(f"{multiplicand} * {multiplier} = ")
+        
+    if problem_choice == 4: #division
+        divisor, answer, target = division_problem(problem_range_min, problem_range_max)
+        user_answer = input(f'{target} / {divisor} = ')
 
-    elif decision == 2: # subtraction
-        print(f"{first_term} - {second_term}")
-        answer = first_term - second_term
-    
-    elif decision == 3: # multiplication
-       
-        print(f"{rounded_first_term} * {rounded_second_term}")
-        answer = rounded_first_term * rounded_second_term
-    
-    else: #division  
-        print(f"{rounded_first_term} / {rounded_second_term}")
-        answer = math.floor(rounded_first_term / rounded_second_term)
-    
-    return round(answer,2)
-
-first_term = round(random.uniform(-120.0, 120.0), 2)
-second_term = round(random.uniform(-120.0, 120.0), 2)
-
-answer = math_problem(first_term, second_term)
-user_answer = float(input("Whats the solution?: "))
-
-if user_answer == answer:
-    print("Correct")
-else:
-    print(f"The answer was: {answer}")
-    print(type(answer))
+    if answer == int(user_answer):
+        print("Correct")
+    else:
+        print("Wrong")
+        print(answer)
